@@ -1,6 +1,8 @@
 # MonkeToggler
 MonkeToggler is a simple [BepInEx](https://github.com/BepInEx/BepInEx) mod toggler made for [Gorilla Tag](https://store.steampowered.com/app/1533390/Gorilla_Tag/).
 
+![image-removebg](https://github.com/pl2w/MonkeToggler/assets/137610832/f37604cc-6d14-4d08-bb5a-1c1457aa5fcc)
+
 ## Installation
 To install the mod, make sure you have BepInEx installed. You can install it through [MonkeModManager](https://github.com/DeadlyKitten/MonkeModManager) or manually install it.
 Once you have BepInEx installed, drag and drop the 'MonkeToggler.dll' file into your BepInEx plugins folder (Gorilla Tag\BepInEx\plugins).
