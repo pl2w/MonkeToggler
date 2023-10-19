@@ -4,18 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace MonkeToggler.Toggler
 {
-    internal class TogglerButton : GorillaPressableButton
+    public class TogglerButton : GorillaPressableButton
     {
         public ButtonType type;
 
-        TogglerButton() => gameObject.layer = 13;
-
-        public override void ButtonActivation()
+        public override void Start()
         {
-            base.ButtonActivation();
+            gameObject.layer = 18;
+
+            onPressButton = new UnityEvent();
+            onPressButton.AddListener(new UnityAction(ButtonActivate));
+        }
+
+        public void ButtonActivate()
+        {
             MonkeTogglerController.instance.OnButtonPress(type);
         }
     }

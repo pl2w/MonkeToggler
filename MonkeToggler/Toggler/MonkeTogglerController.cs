@@ -1,6 +1,8 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
+using GorillaNetworking;
 using HarmonyLib;
+using MonkeToggler.Toggler;
 using MonkeToggler.Utils;
 using System;
 using System.Collections;
@@ -17,8 +19,11 @@ namespace MonkeToggler.Patches
     {
         public static MonkeTogglerController instance;
         List<PluginInfo> disableableMods = new List<PluginInfo>();
-        Text mainText;
+        Text mainText, pageText;
+
         int currentModIndex;
+        int maxModsPerPage = 8;
+        int currentPage, maxPages;
 
         public void Start()
         {
@@ -33,6 +38,10 @@ namespace MonkeToggler.Patches
             bundle.Unload(false);
 
             mainText = pager.transform.Find("Canvas/Main").GetComponent<Text>();
+            pageText = pager.transform.Find("Canvas/PageText").GetComponent<Text>();
+            pager.transform.Find("pager/LeftButton").gameObject.AddComponent<TogglerButton>().type = ButtonType.Down;
+            pager.transform.Find("pager/MiddleButton").gameObject.AddComponent<TogglerButton>().type = ButtonType.Toggle;
+            pager.transform.Find("pager/RightButton").gameObject.AddComponent<TogglerButton>().type = ButtonType.Up;
 
             transform.position = GorillaLocomotion.Player.Instance.transform.position;
 
@@ -55,20 +64,25 @@ namespace MonkeToggler.Patches
                 }
             }
 
+            maxPages = Mathf.CeilToInt(disableableMods.Count / maxModsPerPage);
+
             RefreshMainText();
         }
 
         public void RefreshMainText()
         {
+            currentPage = Mathf.CeilToInt(currentModIndex / maxModsPerPage);
+
+            pageText.text = $"{currentPage + 1}/{maxPages + 1}";
+
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("MONKETOGGLER");
+            sb.AppendLine($"MONKETOGGLER");
 
-            foreach (PluginInfo item in disableableMods)
+            for (int i = currentPage * 8; i < disableableMods.Count; i++)
             {
-                string hexColor = (item.Instance.enabled ? "00FF00" : "FF0000");
-                sb.AppendLine($"> <color=#{hexColor}>{item.Metadata.Name}</color>").AppendLine();
+                sb.AppendLine($"<color=#{(currentModIndex == i ? "FFFFFFFF" : "FFFFFF00")}>></color> <color=#{(disableableMods[i].Instance.enabled ? "00FF00" : "FF0000")}>{disableableMods[i].Metadata.Name.ToUpper()}</color>");
             }
-
+            
             mainText.text = sb.ToString();
         }
 
@@ -84,7 +98,7 @@ namespace MonkeToggler.Patches
                             currentModIndex--;
                         break;
                     case ButtonType.Down:
-                        if (currentModIndex < disableableMods.Count - 1)
+                        if(currentModIndex < disableableMods.Count - 1)
                             currentModIndex++;
                         break;
                     case ButtonType.Toggle:
@@ -96,9 +110,30 @@ namespace MonkeToggler.Patches
             }
             catch (Exception e)
             {
-                mainText.text = e.Message;
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("UH OH :( AN ERROR HAS OCCURED!").AppendLine("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
+                sb.AppendLine(e.Message);
+                mainText.text = sb.ToString();
             }
         }
+
+#if DEBUG
+        void OnGUI()
+        {
+            if(GUI.Button(new Rect(5,5,250,25), "up"))
+            {
+                OnButtonPress(ButtonType.Up);
+            }
+            if (GUI.Button(new Rect(5, 35, 250, 25), "down"))
+            {
+                OnButtonPress(ButtonType.Down);
+            }
+            if (GUI.Button(new Rect(5, 65, 250, 25), "toggle"))
+            {
+                OnButtonPress(ButtonType.Toggle);
+            }
+        }
+#endif
     }
 
     public enum ButtonType

@@ -414,6 +414,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestPlugins.cs" />
     <Compile Include="Toggler\TogglerButton.cs" />
     <Compile Include="Utils\DevHoldable.cs" />
     <Compile Include="Toggler\MonkeTogglerController.cs" />
