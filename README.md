@@ -3,7 +3,7 @@ MonkeToggler is a simple [BepInEx](https://github.com/BepInEx/BepInEx) mod toggl
 
 [![Github All Releases](https://img.shields.io/github/downloads/pl2w/MonkeToggler/total.svg)]()
 
-![image-removebg](https://github.com/pl2w/MonkeToggler/assets/137610832/f37604cc-6d14-4d08-bb5a-1c1457aa5fcc)
+![Gorilla_Tag_6alGsnPxt8](https://github.com/pl2w/MonkeToggler/assets/137610832/6f431579-48f5-403b-a0e9-e069626c84f1)
 
 ## Installation
 To install the mod, make sure you have BepInEx installed. You can install it through [MonkeModManager](https://github.com/DeadlyKitten/MonkeModManager) or manually install it.
