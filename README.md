@@ -1,6 +1,6 @@
 # MonkeToggler
 MonkeToggler is a simple [BepInEx](https://github.com/BepInEx/BepInEx) mod toggler made for [Gorilla Tag](https://store.steampowered.com/app/1533390/Gorilla_Tag/).
-
+[![Github All Releases](https://img.shields.io/github/downloads/pl2w/MonkeToggler/total.svg)]()
 ![image-removebg](https://github.com/pl2w/MonkeToggler/assets/137610832/f37604cc-6d14-4d08-bb5a-1c1457aa5fcc)
 
 ## Installation
