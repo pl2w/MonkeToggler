@@ -88,6 +88,12 @@ namespace MonkeToggler.Patches
 
         public void OnButtonPress(ButtonType type)
         {
+            if(!Plugin.inModded)
+            {
+                mainText.text = "GO INTO A MODDED LOBBY!";
+                return;
+            }   
+
             // just incase
             try
             {

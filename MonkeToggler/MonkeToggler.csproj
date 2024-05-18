@@ -412,9 +412,11 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Gorilla Tag\Gorilla Tag_Data\Managed\UnityEngine.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="Utilla">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Gorilla Tag\BepInEx\plugins\Utilla\Utilla.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestPlugins.cs" />
     <Compile Include="Toggler\TogglerButton.cs" />
     <Compile Include="Utils\DevHoldable.cs" />
     <Compile Include="Toggler\MonkeTogglerController.cs" />
